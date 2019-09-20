@@ -2,15 +2,40 @@ import java.util.*;
 
 public class Main {
 
+    static Scanner scan = new Scanner(System.in);
+
     public static void main(String[] args) {
-        int m = 6;
-        int n = 4;
+
+        System.out.println("Podaj wymiar poziomy blachy: ");
+        int m = scan.nextInt();
+        System.out.println("Podaj wymiar pionowy blachy: ");
+        int n = scan.nextInt();
+
+        List<Cut> cutsList = new ArrayList<Cut>();
+        System.out.println("Podaj kolejne wartości cięcia blachy pionowo. Program przyjmie tylko " + (m-1) + " wartości.");
+
+        for(int i=1; i<m; i++){
+            int x = scan.nextInt();
+            Cut cut = new Cut("vertical", i, x);
+            cutsList.add(cut);
+        }
+
+        System.out.println("Podaj kolejne wartości cięcia blachy poziomo. Program przyjmie tylko " + (n-1) + " wartości.");
+
+        for(int i=1; i<n; i++){
+            int y = scan.nextInt();
+            Cut cut = new Cut("horizontal", i, y);
+            cutsList.add(cut);
+        }
+
+        System.out.println(cutsList.size());
 
         Fragment fragment = new Fragment(1, 1, m, n);
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(fragment);
-        Tinware tinware = new Tinware(fragments, 0);
 
+        Tinware tinware = new Tinware(fragments, 0);
+        /*
         List<Cut> cuts = Arrays.asList(
                 new Cut("vertical", 1, 2),
                 new Cut("vertical", 2, 1),
@@ -20,13 +45,13 @@ public class Main {
                 new Cut("horizontal", 1, 4),
                 new Cut("horizontal", 2, 1),
                 new Cut("horizontal", 3, 2)
-        );
+        );*/
 
         //sortowanie listy cięć według kosztu malejąco - cięcia pionowe i poziome razem
-        cuts.sort(Comparator.comparing(Cut::getCost).reversed());
+        cutsList.sort(Comparator.comparing(Cut::getCost).reversed());
 
         //wykonywanie cięć pionowych lub poziomych wg powyższej kolejności
-        for (Cut cut : cuts) {
+        for (Cut cut : cutsList) {
             System.out.println(cut.getOrientation());
 
             if (cut.getOrientation().equals("vertical")) {
