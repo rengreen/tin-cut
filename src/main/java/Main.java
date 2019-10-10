@@ -50,72 +50,21 @@ public class Main {
         //sortowanie listy cięć według kosztu malejąco - cięcia pionowe i poziome razem
         cutsList.sort(Comparator.comparing(Cut::getCost).reversed());
 
+        CuttingService cuttingService = new CuttingService();
         //wykonywanie cięć pionowych lub poziomych wg powyższej kolejności
         for (Cut cut : cutsList) {
             System.out.println(cut.getOrientation());
 
             if (cut.getOrientation().equals("vertical")) {
-                doVerticalCut(tinware, cut);
+                cuttingService.doVerticalCut(tinware, cut);
             } else {
-                doHorizontalCut(tinware, cut);
+                cuttingService.doHorizontalCut(tinware, cut);
             }
             System.out.println(tinware.cost);
         }
 
         System.out.println(tinware.cost);
 
-    }
-
-    //pojedyńcze cięcie poziome
-    static Tinware doHorizontalCut(Tinware tinware, Cut cut) {
-
-        int cutPosition = cut.getPosition();
-        List<Fragment> fragments = tinware.getFragments();
-        List<Fragment> newFragments = new ArrayList<>();
-
-        for (Fragment fragment : fragments) {
-            int startY = fragment.getCoordinateY();
-            int endY = fragment.getCoordinateY() + fragment.getDimensionY() - 1;
-            int startX = fragment.getCoordinateX();
-            int dimX = fragment.getDimensionX();
-
-            if (cutPosition >= startY && cutPosition < endY) {
-                tinware.setCost(tinware.getCost() + cut.getCost());
-
-                newFragments.add(new Fragment(startX, startY, dimX, cutPosition));
-                newFragments.add(new Fragment(startX, cutPosition + 1, dimX, endY - cutPosition));
-            } else {
-                newFragments.add(fragment);
-            }
-        }
-        tinware.setFragments(newFragments);
-        return tinware;
-    }
-
-    //pojedyńcze cięcie pionowe
-    static Tinware doVerticalCut(Tinware tinware, Cut cut) {
-
-        int cutPosition = cut.getPosition();
-        List<Fragment> fragments = tinware.getFragments();
-        List<Fragment> newFragments = new ArrayList<>();
-
-        for (Fragment fragment : fragments) {
-            int startX = fragment.getCoordinateX();
-            int endX = fragment.getCoordinateX() + fragment.getDimensionX() - 1;
-            int startY = fragment.getCoordinateY();
-            int dimY = fragment.getDimensionY();
-
-            if (cutPosition >= startX && cutPosition < endX) {
-                tinware.setCost(tinware.getCost() + cut.getCost());
-
-                newFragments.add(new Fragment(startX, startY, cutPosition, dimY));
-                newFragments.add(new Fragment(cutPosition + 1, startY, endX - cutPosition, dimY));
-            } else {
-                newFragments.add(fragment);
-            }
-        }
-        tinware.setFragments(newFragments);
-        return tinware;
     }
 
 }
