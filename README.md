@@ -22,5 +22,32 @@ Cuts are made starting from the most expensive, with the vertical and horizontal
 # 
 ![step 8](images/step8.png)
 
-# total cost=42
+## total cost=42
+
+# Cutting
+Fragment before cutting:  
+```Fragment(startX, startY, dimX, dimY));```
+
+Two fragments after vertical cutting at cutPosition:  
+```Fragment(startX, startY, cutPosition, dimY));```  
+```Fragment(cutPosition + 1, startY, endX - cutPosition, dimY));``` 
+
+![before cutting](images/cut0.png)
+#  
+![after cutting - fragment 1](images/cut1.png)
+```startX = startX = 1;```  
+```startY = startY = 1;```  
+```dimX = cutPosition = 5;```  
+```dimY = dimY = 4;```
+# 
+![after cutting - fragment 2](images/cut2.png)
+```startX = cutPosition + 1 = 5+1 = 6;```  
+```startY = startY = 1;```  
+```dimX = endX - cutPosition = 6-5 = 1;```  
+```dimY = dimY = 4;```
+
+
+
+
+
 
