@@ -1,3 +1,5 @@
+package model;
+
 public class Fragment {
     private int coordinateX;
     private int coordinateY;

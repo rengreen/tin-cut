@@ -1,10 +1,16 @@
+package service;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Cut;
+import model.Fragment;
+import model.Tinware;
 
 public class CuttingService {
 
     //pojedyńcze cięcie poziome
-    void doHorizontalCut(Tinware tinware, Cut cut) {
+    public void doHorizontalCut(Tinware tinware, Cut cut) {
 
         int cutPosition = cut.getPosition();
         List<Fragment> fragments = tinware.getFragments();
@@ -29,7 +35,7 @@ public class CuttingService {
     }
 
     //pojedyńcze cięcie pionowe
-    void doVerticalCut(Tinware tinware, Cut cut) {
+    public void doVerticalCut(Tinware tinware, Cut cut) {
 
         int cutPosition = cut.getPosition();
         List<Fragment> fragments = tinware.getFragments();

@@ -1,3 +1,8 @@
+import model.Cut;
+import model.Fragment;
+import model.Tinware;
+import service.CuttingService;
+
 import java.util.*;
 
 public class Main {
@@ -36,15 +41,15 @@ public class Main {
 
         Tinware tinware = new Tinware(fragments, 0);
         /*
-        List<Cut> cuts = Arrays.asList(
-                new Cut("vertical", 1, 2),
-                new Cut("vertical", 2, 1),
-                new Cut("vertical", 3, 3),
-                new Cut("vertical", 4, 1),
-                new Cut("vertical", 5, 4),
-                new Cut("horizontal", 1, 4),
-                new Cut("horizontal", 2, 1),
-                new Cut("horizontal", 3, 2)
+        List<model.Cut> cuts = Arrays.asList(
+                new model.Cut("vertical", 1, 2),
+                new model.Cut("vertical", 2, 1),
+                new model.Cut("vertical", 3, 3),
+                new model.Cut("vertical", 4, 1),
+                new model.Cut("vertical", 5, 4),
+                new model.Cut("horizontal", 1, 4),
+                new model.Cut("horizontal", 2, 1),
+                new model.Cut("horizontal", 3, 2)
         );*/
 
         //sortowanie listy cięć według kosztu malejąco - cięcia pionowe i poziome razem
@@ -60,10 +65,10 @@ public class Main {
             } else {
                 cuttingService.doHorizontalCut(tinware, cut);
             }
-            System.out.println(tinware.cost);
+            System.out.println(tinware.getCost());
         }
 
-        System.out.println(tinware.cost);
+        System.out.println(tinware.getCost());
 
     }
 

@@ -1,3 +1,5 @@
+package model;
+
 public class Cut {
 
     private String orientation;
